@@ -1,5 +1,11 @@
-import type { GameMode, Move, Result } from "./types.js";
+import type { GameMode, Move } from "./types.js";
 import { getComputerMove } from "./utils.js";
+
+const rules: { [key in Move]: Move[] } = {
+    rock: ['scissors'],
+    paper: ['rock'],
+    scissors: ['paper']
+};
 
 export const playGame = (player1Move?: Move, player2Move?: Move) => {
     const player1: Move = player1Move || getComputerMove();
@@ -11,16 +17,12 @@ export const playGame = (player1Move?: Move, player2Move?: Move) => {
     return { player1, player2, result, gameMode };
 }
 
-export const calculateGameResult = (player1Move: Move, player2Move: Move): Result => {
+export const calculateGameResult = (player1Move: Move, player2Move: Move): string => {
     if (player1Move === player2Move) {
-        return "It's a tie";
+        return 'It\'s a tie';
     }
 
-    if (
-        (player1Move === 'paper' && player2Move === 'rock') ||
-        (player1Move === 'rock' && player2Move === 'scissors') ||
-        (player1Move === 'scissors' && player2Move === 'paper')
-    ) {
+    if (rules[player1Move].includes(player2Move)) {
         return 'Player 1 wins';
     }
 

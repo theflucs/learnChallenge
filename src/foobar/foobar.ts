@@ -17,6 +17,7 @@ export const foobar = (): (string | number)[] => {
         result.push(output);
     }
 
-    console.log('FOOBAR: ', result);
+    result.forEach(el => console.log(el));
+
     return result;
 }

@@ -1,0 +1,33 @@
+{
+  "name": "learn-challenge",
+  "author": "Sabrina Cuccureddu <sa.cux.dev@gmail.com>",
+  "description": "Learn challenge MVP",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/eslint": "^8.56.3",
+    "@types/node": "^20.11.20",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.2.5",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
+  },
+  "private": true,
+  "scripts": {
+    "build": "tsx",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "prepare": "husky",
+    "start": "tsx src/index.ts",
+    "test": "vitest run --passWithNoTests",
+    "test.watch": "vitest",
+    "type-check": "tsc --noEmit"
+  },
+  "type": "module"
+}

@@ -16,14 +16,21 @@
       <button id="toggle-choose-mode-button" data-id="2">Play Rock-Paper-Scissors Game</button>
     </menu>
     <main>
-      <div id="foobar-container" style="display: none;"></div>
+      <div id="foobar-container"></div>
 
       <div id="game-intro-container" style="display: none;">
         <h2 id="game-title">Ready to play Rock, Paper, Scissors?</h2>
         <button id="game-mode-button">Play!</button>
       </div>
 
-      <div id="game-mode-container" style="display: none;"></div>
+      <div id="game-mode-container">
+        <h2>Choose playing mode</h2>
+        <div id="mode-buttons" class="mode-buttons">
+          <button class="mode-button" data-mode="HvsH">Player vs Player</button>
+          <button class="mode-button" data-mode="HvsC">Player vs Computer</button>
+          <button class="mode-button" data-mode="CvsC">Computer vs Computer</button>
+        </div>
+      </div>
     </main>
   </div>
   </div>

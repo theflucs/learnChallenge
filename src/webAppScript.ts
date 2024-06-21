@@ -15,6 +15,12 @@ const gameIntroContainer = document.getElementById(
 const gameModeButton = document.getElementById(
   'game-mode-button',
 ) as HTMLButtonElement | null;
+const gameModeContainer = document.getElementById('game-mode-container');
+const modeButtons = document.querySelectorAll(
+  '.mode-button',
+) as NodeListOf<HTMLButtonElement>;
+
+let selectedMode = '';
 
 const makeFoobar = () => {
   const content = `
@@ -29,6 +35,7 @@ const makeFoobar = () => {
     foobarContainer.innerHTML = content;
   }
 };
+
 const toggleMenuContainers = (id: string | undefined) => {
   if (id === '1') {
     toggleContainers('foobar');
@@ -46,6 +53,9 @@ const toggleContainers = (containerToShow: string) => {
     toggleFoobarButton &&
     toggleChooseModeButton
   ) {
+    if (gameModeContainer?.style.display === 'block') {
+      gameModeContainer.style.display = 'none';
+    }
     if (containerToShow === 'foobar') {
       if (foobarContainer.style.display === 'block') {
         foobarContainer.style.display = 'none';
@@ -90,7 +100,22 @@ if (toggleChooseModeButton) {
     }
   };
 }
+
 const openChooseModeContainer = (): void => {
-  console.log('openChooseModeContainer');
+  if (gameModeContainer) {
+    gameModeContainer.style.display = 'block';
+  }
 };
+
 if (gameModeButton) gameModeButton.onclick = () => openChooseModeContainer();
+
+const selectMode = (event: MouseEvent) => {
+  if (event.target instanceof HTMLButtonElement) {
+    if (event.target.dataset.mode) {
+      selectedMode = event.target.dataset.mode;
+      console.log(selectedMode);
+    }
+  }
+};
+
+modeButtons.forEach((button) => button.addEventListener('click', selectMode));

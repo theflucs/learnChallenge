@@ -9,77 +9,94 @@ const toggleChooseModeButton = document.getElementById(
 const foobarContainer = document.getElementById(
   'foobar-container',
 ) as HTMLDivElement | null;
-const gameIntroContainer = document.getElementById(
-  'game-intro-container',
+const gameModeContainer = document.getElementById(
+  'game-mode-container',
 ) as HTMLDivElement | null;
-const gameModeButton = document.getElementById(
-  'game-mode-button',
-) as HTMLButtonElement | null;
-const gameModeContainer = document.getElementById('game-mode-container');
+const gameDeck = document.getElementById('game-deck') as HTMLDivElement;
+const gameWrapper = document.getElementById('game-wrapper') as HTMLDivElement;
 const modeButtons = document.querySelectorAll(
   '.mode-button',
 ) as NodeListOf<HTMLButtonElement>;
 
-let selectedMode = '';
-
 const makeFoobar = () => {
-  const content = `
-    <h2>Foobar Output</h2>
-    <ul class="number-list">
-      ${foobar()
-        .map((item, index) => `<li key="${index}">${item}</li>`)
-        .join('')}
-    </ul>
-  `;
   if (foobarContainer) {
-    foobarContainer.innerHTML = content;
+    foobarContainer.innerHTML = `
+        <h2>Foobar Output</h2>
+        <ul class="number-list">
+          ${foobar()
+            .map((item, index) => `<li key="${index}">${item}</li>`)
+            .join('')}
+        </ul>
+      `;
   }
 };
+
+let isFoobarOpen = foobarContainer && foobarContainer.style.display === 'block';
+let isPlayOpen = gameWrapper && gameWrapper.style.display === 'block';
 
 const toggleMenuContainers = (id: string | undefined) => {
   if (id === '1') {
-    toggleContainers('foobar');
+    if (!isFoobarOpen && !isPlayOpen) {
+      if (foobarContainer) foobarContainer.style.display = 'none';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'View foobar';
+      if (gameWrapper) gameWrapper.style.display = 'none';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Play Rock-Paper-Scissors game';
+    }
+    if (isFoobarOpen && isPlayOpen) {
+      if (foobarContainer) foobarContainer.style.display = 'block';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'View foobar';
+      if (gameWrapper) gameWrapper.style.display = 'block';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Hide game';
+      isPlayOpen = !isPlayOpen;
+    }
+    if (isFoobarOpen && !isPlayOpen) {
+      makeFoobar();
+      if (foobarContainer) foobarContainer.style.display = 'block';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'Hide foobar';
+      if (gameWrapper) gameWrapper.style.display = 'none';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Play Rock-Paper-Scissors game';
+    }
+    if (!isFoobarOpen && isPlayOpen) {
+      if (foobarContainer) foobarContainer.style.display = 'none';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'View foobar';
+      if (gameWrapper) gameWrapper.style.display = 'block';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Hide game';
+    }
   } else if (id === '2') {
-    toggleContainers('gameIntro');
+    if (!isFoobarOpen && !isPlayOpen) {
+      if (gameWrapper) gameWrapper.style.display = 'none';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Play Rock-Paper-Scissors game';
+      if (foobarContainer) foobarContainer.style.display = 'none';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'View foobar';
+    }
+
+    if (isFoobarOpen && isPlayOpen) {
+      if (foobarContainer) foobarContainer.style.display = 'none';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'View foobar';
+      if (gameWrapper) gameWrapper.style.display = 'block';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Hide game';
+      isFoobarOpen = !isFoobarOpen;
+    }
+    if (isFoobarOpen && !isPlayOpen) {
+      if (foobarContainer) foobarContainer.style.display = 'none';
+      if (toggleFoobarButton) toggleFoobarButton.textContent = 'View foobar';
+      if (gameWrapper) gameWrapper.style.display = 'block';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Hide game';
+    }
+    if (!isFoobarOpen && isPlayOpen) {
+      if (gameWrapper) gameWrapper.style.display = 'block';
+      if (toggleChooseModeButton)
+        toggleChooseModeButton.textContent = 'Hide game';
+    }
   } else {
     throw new Error('Invalid id');
-  }
-};
-
-const toggleContainers = (containerToShow: string) => {
-  if (
-    foobarContainer &&
-    gameIntroContainer &&
-    toggleFoobarButton &&
-    toggleChooseModeButton
-  ) {
-    if (gameModeContainer?.style.display === 'block') {
-      gameModeContainer.style.display = 'none';
-    }
-    if (containerToShow === 'foobar') {
-      if (foobarContainer.style.display === 'block') {
-        foobarContainer.style.display = 'none';
-        toggleFoobarButton.textContent = 'View Foobar';
-      } else {
-        makeFoobar();
-        foobarContainer.style.display = 'block';
-        toggleFoobarButton.textContent = 'Hide Foobar';
-        gameIntroContainer.style.display = 'none';
-        toggleChooseModeButton.textContent = 'Play Rock-Paper-Scissors Game';
-      }
-    } else if (containerToShow === 'gameIntro') {
-      if (gameIntroContainer.style.display === 'block') {
-        gameIntroContainer.style.display = 'none';
-        toggleChooseModeButton.textContent = 'Play Rock-Paper-Scissors Game';
-      } else {
-        gameIntroContainer.style.display = 'block';
-        toggleChooseModeButton.textContent = 'Hide game';
-        foobarContainer.style.display = 'none';
-        toggleFoobarButton.textContent = 'View Foobar';
-      }
-    } else {
-      throw new Error('Invalid containerToShow');
-    }
   }
 };
 
@@ -87,6 +104,7 @@ if (toggleFoobarButton) {
   toggleFoobarButton.onclick = (event) => {
     if (event.target instanceof HTMLButtonElement) {
       const id: string | undefined = event.target.dataset.id;
+      isFoobarOpen = !isFoobarOpen;
       toggleMenuContainers(id);
     }
   };
@@ -96,26 +114,71 @@ if (toggleChooseModeButton) {
   toggleChooseModeButton.onclick = (event) => {
     if (event.target instanceof HTMLButtonElement) {
       const id: string | undefined = event.target.dataset.id;
+      isPlayOpen = !isPlayOpen;
       toggleMenuContainers(id);
     }
   };
 }
 
-const openChooseModeContainer = (): void => {
-  if (gameModeContainer) {
-    gameModeContainer.style.display = 'block';
+const openGameDeck = () => {
+  if (gameDeck && gameModeContainer) {
+    gameDeck.style.display = 'block';
+    gameModeContainer.style.display = 'none';
   }
 };
 
-if (gameModeButton) gameModeButton.onclick = () => openChooseModeContainer();
-
 const selectMode = (event: MouseEvent) => {
   if (event.target instanceof HTMLButtonElement) {
-    if (event.target.dataset.mode) {
-      selectedMode = event.target.dataset.mode;
-      console.log(selectedMode);
+    const selectedMode = event.target.dataset.mode;
+    setSelectedModeTitle(selectedMode);
+    setPlayersNames(selectedMode);
+    openGameDeck();
+  }
+};
+
+modeButtons.forEach((button) => {
+  button.addEventListener('click', selectMode);
+});
+
+const setSelectedModeTitle = (selectedMode: string | undefined) => {
+  const titleElement = document.getElementById('selected-mode-title');
+  if (titleElement && selectedMode) {
+    switch (selectedMode) {
+      case 'HvsH':
+        titleElement.textContent = 'Player vs Player';
+        break;
+      case 'HvsC':
+        titleElement.textContent = 'Player vs Computer';
+        break;
+      case 'CvsC':
+        titleElement.textContent = 'Computer vs Computer';
+        break;
+      default:
+        break;
     }
   }
 };
 
-modeButtons.forEach((button) => button.addEventListener('click', selectMode));
+const setPlayersNames = (selectedMode: string | undefined) => {
+  const player1NameElement = document.getElementById('player1-name');
+  const player2NameElement = document.getElementById('player2-name');
+
+  if (!selectedMode || !player1NameElement || !player2NameElement) return;
+
+  switch (selectedMode) {
+    case 'HvsH':
+      player1NameElement.textContent = 'Player 1';
+      player2NameElement.textContent = 'Player 2';
+      break;
+    case 'HvsC':
+      player1NameElement.textContent = 'Player 1';
+      player2NameElement.textContent = 'Computer';
+      break;
+    case 'CvsC':
+      player1NameElement.textContent = 'Computer 1';
+      player2NameElement.textContent = 'Computer 2';
+      break;
+    default:
+      break;
+  }
+};

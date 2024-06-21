@@ -38,3 +38,11 @@ export const getGameMode = (player1Move?: Move, player2Move?: Move): GameMode =>
         return 'CvsC';
     }
 }
+export const isValidMove = (move: string): boolean => {
+    if (move) {
+        const normalizedMove = move.trim().toLowerCase();
+        return normalizedMove === 'rock' || normalizedMove === 'paper' || normalizedMove === 'scissors';
+    } else {
+        return false;
+    }
+};

@@ -32,27 +32,36 @@ export const initGame = () => {
             rl.close();
         } else {
             console.log('Invalid choice! Please enter 1, 2, or 3.');
-            initGame(); // Restart game initialization
+            initGame();
         }
     });
 };
 
 const startHvsH = (move1: Move, move2: Move) => {
     playGame(move1, move2);
-    rl.close();
+    promptExit();
 };
 
 const startHvsC = (move1: Move) => {
     playGame(move1);
-    rl.close();
+    promptExit();
 };
 
 const startCvsC = () => {
     console.log('Computer vs Computer mode selected.');
     playGame();
-    rl.close();
+    promptExit();
 };
 
+const promptExit = () => {
+    rl.question('Do you want to play again? (yes/no): ', (answer) => {
+        if (answer.toLowerCase() === 'yes') {
+            initGame();
+        } else {
+            console.log('Exiting the application...');
+            rl.close();
+        }
+    });
+};
 
-// Export the initGame function to be able to call it externally
 export default initGame;

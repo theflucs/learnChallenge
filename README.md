@@ -3,9 +3,25 @@
 ```
 nvm use
 pnpm i
-pnpm start
 pnpm test
 ```
+
+#### Run app in terminal
+
+`pnpm start`
+
+#### Web App | Launch a local development server with live reload
+
+`pnpm install live-server`
+
+[Live Server VS Code extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+Click "Go Live" in status bar
+
+`pnpm live`
+
+Check Live Server settings if you encounter port issues or serving files from dist folder.
+Also [its GitHub](https://github.com/ritwickdey/vscode-live-server/issues) can help you troubleshoot any issue.
 
 # CODING PROBLEM
 

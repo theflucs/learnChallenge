@@ -1,13 +1,7 @@
-import { foobar } from "./foobar/foobar.js";
-import { playGame } from "./rps/rps.js";
+// import { foobar } from "./foobar/foobar.js";
+import initGame from "./ui/terminal/terminal.js";
 
-foobar();
+// foobar();
 
-// simulate human vs human
-playGame('rock', 'paper');
-
-// simulate human vs computer
-playGame('rock');
-
-// simulate computer vs computer
-playGame();
+// terminal ui
+initGame();

@@ -12,7 +12,7 @@ export const playGame = (player1Move?: Move, player2Move?: Move) => {
     const player2: Move = player2Move || getComputerMove();
     const result = calculateGameResult(player1, player2);
     const gameMode = getGameMode(player1Move, player2Move);
-    const resultString = `Play in mode ${gameMode}\n${player1} vs ${player2} * Result: ${result}`;
+    const resultString = `Players' moves: ${player1} vs ${player2}\nResult: ${result}!`;
     console.log(resultString);
     return { player1, player2, result, gameMode };
 }

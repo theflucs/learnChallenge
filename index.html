@@ -4,21 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learn Challenge</title>
+  <title>Learn challenge</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <header>
-    <h1>Learn Challenge</h1>
-  </header>
-  <main id="app">
-    <nav class="menu">
-      <button id="toggle-foobar-button" data-id="1">View Foobar</button>
+  <div id="app">
+    <h1>Learn challenge</h1>
+    <menu>
+      <button id="toggle-foobar-button" data-id="1">View foobar</button>
       <button id="toggle-choose-mode-button" data-id="2">Play Rock-Paper-Scissors Game</button>
-    </nav>
-    <section id="content"></section>
-  </main>
+    </menu>
+    <main>
+      <div id="foobar-container" style="display: none;"></div>
+
+      <div id="game-intro-container" style="display: none;">
+        <h2 id="game-title">Ready to play Rock, Paper, Scissors?</h2>
+        <button id="game-mode-button">Play!</button>
+      </div>
+
+      <div id="game-mode-container" style="display: none;"></div>
+    </main>
+  </div>
+  </div>
   <script src="dist/src/webAppScript.js" type="module"></script>
 </body>
 

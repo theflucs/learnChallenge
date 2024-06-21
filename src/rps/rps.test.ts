@@ -1,4 +1,4 @@
-import { calculateGameResult, getGameMode, playGame } from './rps.js';
+import { calculateGameResult, getGameMode, isValidMove, playGame } from './rps.js';
 import * as utils from './utils.js';
 
 describe('getComputerMove', () => {
@@ -95,5 +95,26 @@ describe('playGame', () => {
         expect(player1).toBe('rock');
         expect(player2).toBe('paper');
         expect(result).toBe('Player 2 wins');
+    });
+});
+
+describe('isValidMove', () => {
+    it('should validate moves correctly', () => {
+        expect(isValidMove('rock')).toBe(true);
+        expect(isValidMove(' rock ')).toBe(true);
+        expect(isValidMove('ROCK')).toBe(true);
+
+        expect(isValidMove('paper')).toBe(true);
+        expect(isValidMove('paper  ')).toBe(true);
+        expect(isValidMove('PAPER')).toBe(true);
+
+        expect(isValidMove('scissors')).toBe(true);
+        expect(isValidMove(' scissors')).toBe(true);
+        expect(isValidMove('SCISSORS')).toBe(true);
+
+        expect(isValidMove('')).toBe(false);
+        expect(isValidMove('1')).toBe(false);
+        expect(isValidMove('123')).toBe(false);
+        expect(isValidMove('  asda  ')).toBe(false);
     });
 });

@@ -133,6 +133,7 @@ const selectMode = (event: MouseEvent) => {
     setSelectedModeTitle(selectedMode);
     setPlayersNames(selectedMode);
     openGameDeck();
+    makeDeck(selectedMode);
   }
 };
 
@@ -181,4 +182,56 @@ const setPlayersNames = (selectedMode: string | undefined) => {
     default:
       break;
   }
+};
+
+const makeDeck = (selectedMode: string | undefined) => {
+  const player1Moves = document.getElementById(
+    'player1-moves',
+  ) as HTMLDivElement;
+  const player2Moves = document.getElementById(
+    'player2-moves',
+  ) as HTMLDivElement;
+  const computerPlaceholder = document.getElementById(
+    'computer-placeholder',
+  ) as HTMLDivElement;
+  const computersPlaceholder = document.getElementById(
+    'computers-placeholder',
+  ) as HTMLDivElement;
+
+  if (
+    !selectedMode ||
+    !player1Moves ||
+    !player2Moves ||
+    !computerPlaceholder ||
+    !computersPlaceholder
+  ) {
+    return;
+  }
+
+  switch (selectedMode) {
+    case 'HvsH':
+      break;
+    case 'HvsC':
+      disableButtons(player2Moves);
+      computerPlaceholder.style.display = 'block';
+      break;
+    case 'CvsC':
+      disableButtons(player1Moves);
+      disableButtons(player2Moves);
+      computersPlaceholder.style.display = 'block';
+      break;
+    default:
+      break;
+  }
+};
+
+const disableButtons = (container: HTMLDivElement) => {
+  console.log('container', container);
+  const buttons = container.querySelectorAll('button');
+  buttons.forEach((button) => {
+    button.disabled = true;
+    button.style.pointerEvents = 'none';
+    button.style.color = 'darkgray';
+    button.style.backgroundColor = 'lightgray';
+  });
 };

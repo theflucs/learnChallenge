@@ -1,7 +1,4 @@
-// import { foobar } from "./foobar/foobar.js";
-import initGame from "./ui/terminal/terminal.js";
-
-// foobar();
+import mainMenu from "./ui/terminal/mainMenu.js";
 
 // terminal ui
-initGame();
+mainMenu();

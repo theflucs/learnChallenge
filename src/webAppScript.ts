@@ -149,7 +149,9 @@ const selectMode = (event: MouseEvent) => {
     setTimeout(() => {
       const {player1, player2, result} = playGame();
       player1Move.textContent = player1.toUpperCase();
+      player1Move.style.display = 'inline';
       player2Move.textContent = player2.toUpperCase();
+      player2Move.style.display = 'inline';
       gameResultElement.textContent = result;
       gameResultElement.style.display = 'block';
       computersPlaceholder.style.display = 'none';

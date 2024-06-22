@@ -8,7 +8,6 @@ const rules: {[key in Move]: Move[]} = {
 };
 
 export const playGame = (player1Move?: Move, player2Move?: Move) => {
-  console.log('play game');
   const player1: Move = player1Move || getComputerMove();
   const player2: Move = player2Move || getComputerMove();
   const result = calculateGameResult(player1, player2);

@@ -38,8 +38,11 @@ const computerPlaceholder = document.getElementById(
 const computersPlaceholder = document.getElementById(
   'computers-placeholder',
 ) as HTMLDivElement;
+const playAgainButton = document.getElementById(
+  'play-again-button',
+) as HTMLButtonElement;
 
-let selectedMode: GameMode;
+let selectedMode: GameMode | null;
 
 const makeFoobar = () => {
   foobarContainer.innerHTML = `
@@ -124,7 +127,6 @@ const toggleMenuContainers = (id: string | undefined) => {
 }
 
 toggleChooseModeButton.onclick = (event) => {
-  console.log('toggleChooseModeButton clicked');
   if (event.target instanceof HTMLButtonElement) {
     const id: string | undefined = event.target.dataset.id;
     isPlayOpen = !isPlayOpen;
@@ -155,12 +157,12 @@ const selectMode = (event: MouseEvent) => {
       gameResultElement.textContent = result;
       gameResultElement.style.display = 'block';
       computersPlaceholder.style.display = 'none';
+      playAgainButton.style.display = 'block';
     }, 3000);
   }
 };
 
 const setSelectedModeTitle = (selectedMode: string | undefined) => {
-  console.log('selected mode title', selectedMode);
   const titleElement = document.getElementById('selected-mode-title');
   if (titleElement && selectedMode) {
     switch (selectedMode) {
@@ -210,27 +212,17 @@ const makeDeck = (selectedMode: string | undefined) => {
     case 'HvsH':
       break;
     case 'HvsC':
-      disableButtons(player2Moves);
+      toggleDisableButtons(player2Moves, false);
       computerPlaceholder.style.display = 'block';
       break;
     case 'CvsC':
-      disableButtons(player1Moves);
-      disableButtons(player2Moves);
+      toggleDisableButtons(player1Moves, false);
+      toggleDisableButtons(player2Moves, false);
       computersPlaceholder.style.display = 'block';
       break;
     default:
       break;
   }
-};
-
-const disableButtons = (container: HTMLDivElement) => {
-  const buttons = container.querySelectorAll('button');
-  buttons.forEach((button) => {
-    button.disabled = true;
-    button.style.pointerEvents = 'none';
-    button.style.color = 'darkgray';
-    button.style.backgroundColor = 'lightgray';
-  });
 };
 
 moveButtons.forEach((button) => {
@@ -243,11 +235,21 @@ moveButtons.forEach((button) => {
 });
 
 modeButtons.forEach((button) => {
-  console.log('MODE button', button);
   button.addEventListener('click', (event: MouseEvent) => {
     selectMode(event);
+    playAgainButton.style.display = 'none';
   });
 });
+
+const toggleDisableButtons = (container: HTMLDivElement, enable: boolean) => {
+  const buttons = container.querySelectorAll('button');
+  buttons.forEach((button) => {
+    button.disabled = !enable;
+    button.style.pointerEvents = enable ? 'auto' : 'none';
+    button.style.color = enable ? '' : 'darkgray';
+    button.style.backgroundColor = enable ? '' : 'lightgray';
+  });
+};
 
 let move1: Move | null = null;
 let move2: Move | null = null;
@@ -258,13 +260,13 @@ const handlePlayerMove = (player: number, move: Move) => {
       case 1:
         move1 = move;
         player1Move.textContent = move.toUpperCase();
-        disableButtons(player1Moves);
+        toggleDisableButtons(player1Moves, false);
         player1Move.style.display = 'inline';
         break;
       case 2:
         move2 = move;
         player2Move.textContent = move.toUpperCase();
-        disableButtons(player2Moves);
+        toggleDisableButtons(player2Moves, false);
         player2Move.style.display = 'inline';
         break;
       default:
@@ -279,6 +281,29 @@ const handlePlayerMove = (player: number, move: Move) => {
   } else {
     return;
   }
+};
+
+playAgainButton.onclick = () => {
+  resetGame();
+};
+
+const resetGame = () => {
+  gameModeContainer.style.display = 'block';
+  gameDeck.style.display = 'none';
+  playAgainButton.style.display = 'none';
+  resetPlayerMovesUI();
+  selectedMode = null;
+  gameResultElement.textContent = '';
+  toggleDisableButtons(player1Moves, true);
+  toggleDisableButtons(player2Moves, true);
+  console.log(selectedMode);
+};
+
+const resetPlayerMovesUI = () => {
+  player1Move.textContent = '';
+  player2Move.textContent = '';
+  player1Move.style.display = 'none';
+  player2Move.style.display = 'none';
 };
 
 const play = (move1?: Move, move2?: Move) => {
@@ -307,4 +332,5 @@ const play = (move1?: Move, move2?: Move) => {
 
   gameResultElement.textContent = outcome;
   gameResultElement.style.display = 'block';
+  playAgainButton.style.display = 'block';
 };

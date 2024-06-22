@@ -1,4 +1,4 @@
-import type {GameMode, Move} from './types.js';
+import type {GameMode, Move, Result} from './types.js';
 import {getComputerMove} from './utils.js';
 
 const rules: {[key in Move]: Move[]} = {
@@ -8,6 +8,7 @@ const rules: {[key in Move]: Move[]} = {
 };
 
 export const playGame = (player1Move?: Move, player2Move?: Move) => {
+  console.log('play game');
   const player1: Move = player1Move || getComputerMove();
   const player2: Move = player2Move || getComputerMove();
   const result = calculateGameResult(player1, player2);
@@ -20,7 +21,7 @@ export const playGame = (player1Move?: Move, player2Move?: Move) => {
 export const calculateGameResult = (
   player1Move: Move,
   player2Move: Move,
-): string => {
+): Result => {
   if (player1Move === player2Move) {
     return "It's a tie";
   }
@@ -44,7 +45,7 @@ export const getGameMode = (
     return 'CvsC';
   }
 };
-export const isValidMove = (move: Move | string): boolean => {
+export const isValidMove = (move: Move | string | null): boolean => {
   if (move) {
     const normalizedMove = move.trim().toLowerCase();
     return (

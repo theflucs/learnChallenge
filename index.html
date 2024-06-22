@@ -1,63 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learn challenge</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div id="app">
-    <h1>Learn challenge</h1>
-    <menu>
-      <button id="toggle-foobar-button" data-id="1">View foobar</button>
-      <button id="toggle-choose-mode-button" data-id="2">Play Rock-Paper-Scissors game</button>
-    </menu>
-    <main>
-      <div id="foobar-container" style="display: none;"></div>
-      <div id="game-wrapper" style="display: none;">
-        <div id="game-mode-container">
-          <h2>Choose playing mode</h2>
-          <div id="mode-buttons" class="mode-buttons">
-            <button class="mode-button" data-mode="HvsH">Player vs Player</button>
-            <button class="mode-button" data-mode="HvsC">Player vs Computer</button>
-            <button class="mode-button" data-mode="CvsC">Computer vs Computer</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn challenge</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Learn challenge</h1>
+      <menu>
+        <button id="toggle-foobar-button" data-id="1">View foobar</button>
+        <button id="toggle-choose-mode-button" data-id="2">
+          Play Rock-Paper-Scissors game
+        </button>
+      </menu>
+      <main>
+        <div id="foobar-container" style="display: none"></div>
+        <div id="game-wrapper" style="display: none">
+          <div id="game-mode-container">
+            <h2>Choose playing mode</h2>
+            <div id="mode-buttons" class="mode-buttons">
+              <button class="mode-button" data-mode="HvsH">
+                Player vs Player
+              </button>
+              <button class="mode-button" data-mode="HvsC">
+                Player vs Computer
+              </button>
+              <button class="mode-button" data-mode="CvsC">
+                Computer vs Computer
+              </button>
+            </div>
+          </div>
+          <div id="game-deck" class="game-deck" style="display: none">
+            <h2 id="selected-mode-title"></h2>
+
+            <h4 id="suggestion-placeholder" style="display: none">
+              Make your move first
+            </h4>
+
+            <h3>
+              <span id="player1-name"></span>
+              <span id="player1-move" style="display: none"></span>
+            </h3>
+            <div id="player1-moves" class="move-buttons">
+              <button class="move-button" data-player="1" data-move="rock">
+                Rock
+              </button>
+              <button class="move-button" data-player="1" data-move="paper">
+                Paper
+              </button>
+              <button class="move-button" data-player="1" data-move="scissors">
+                Scissors
+              </button>
+            </div>
+
+            <h3>
+              <span id="player2-name"></span>
+              <span id="player2-move" style="display: none"></span>
+            </h3>
+            <div id="player2-moves" class="move-buttons">
+              <button class="move-button" data-player="2" data-move="rock">
+                Rock
+              </button>
+              <button class="move-button" data-player="2" data-move="paper">
+                Paper
+              </button>
+              <button class="move-button" data-player="2" data-move="scissors">
+                Scissors
+              </button>
+            </div>
+            <h4 id="computers-placeholder" style="display: none">
+              Computers are thinking....
+            </h4>
+            <h4 id="computer-placeholder" style="display: none">
+              Computer is thinking....
+            </h4>
+
+            <h2 id="game-result"></h2>
+            <button id="play-again-button" style="display: none">
+              Play Again?
+            </button>
           </div>
         </div>
-        <div id="game-deck" class="game-deck" style="display: none;">
-          <h2 id="selected-mode-title"></h2>
-  
-          <h4 id="suggestion-placeholder" style="display: none;">Make your move first</h4>
-  
-          <h3>
-            <span id="player1-name"></span>
-            <span id="player1-move" style="display: none;"></span>
-          </h3>
-          <div id="player1-moves" class="move-buttons">
-            <button class="move-button" data-player="1" data-move="rock">Rock</button>
-            <button class="move-button" data-player="1" data-move="paper">Paper</button>
-            <button class="move-button" data-player="1" data-move="scissors">Scissors</button>
-          </div>
-  
-          <h4 id="computers-placeholder" style="display: none;">Computers are thinking....</h4>
-  
-          <h3>
-            <span id="player2-name"></span>
-            <span id="player2-move" style="display: none;"></span>
-          </h3>
-          <div id="player2-moves" class="move-buttons">
-            <button class="move-button" data-player="2" data-move="rock">Rock</button>
-            <button class="move-button" data-player="2" data-move="paper">Paper</button>
-            <button class="move-button" data-player="2" data-move="scissors">Scissors</button>
-          </div>
-          <h4 id="computer-placeholder" style="display: none;">Computer is thinking....</h4>
-  
-          <h2 id="game-result"></h2>
-          <button id="play-again-button" style="display: none;">Play Again?</button>
-        </div>
-      </div>
-    </main>
-  </div>
-  <script src="dist/src/webAppScript.js" type="module"></script>
-</body>
+      </main>
+    </div>
+    <script src="dist/src/ui/web/index.js" type="module"></script>
+  </body>
 </html>

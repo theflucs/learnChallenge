@@ -1,5 +1,5 @@
-import {playRPSgame} from './rockPaperScissorsGame.js';
-import {initToggleGamesMenu} from './toggleGamesMenu.js';
+import {playRPSgame} from './initGame.js';
+import {initToggleGamesMenu} from './toggleMainMenu.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initToggleGamesMenu();

@@ -25,6 +25,7 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "prepare": "husky",
     "start": "tsx src/index.ts",
+    "live": "tsc --watch & live-server",
     "test": "vitest run --passWithNoTests",
     "test.watch": "vitest",
     "type-check": "tsc --noEmit"

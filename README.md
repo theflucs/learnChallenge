@@ -1,3 +1,21 @@
+# CODING PROBLEM
+
+## 1 - FOOBAR
+
+Scrivi un piccolo programma che stampi ogni numero da 1 a 100 su una nuova riga.
+
+- Per ogni multiplo di 3, stampa “Foo” invece del numero.
+- Per ogni multiplo di 5, stampa “Bar” invece del numero.
+- Per ogni numero multiplo di 3 e 5 insieme, stampa “FooBar” invece del numero.
+
+## 2 - Carta, forbice e sasso
+
+### Acceptance Criteria
+
+- Posso giocare Umano vs Computer?
+- Posso giocare Computer vs Computer?
+- Posso giocare una nuova partita conclusa quella precedente?
+
 ### Commands:
 
 ```
@@ -23,20 +41,14 @@ Click "Go Live" in status bar
 Check Live Server settings if you encounter port issues or serving files from dist folder.
 Also [its GitHub](https://github.com/ritwickdey/vscode-live-server/issues) can help you troubleshoot any issue.
 
-# CODING PROBLEM
+## HTML Structure and Data Attributes
 
-## 1 - FOOBAR
+The core logic of the app relies on the use of the `dataset` property.
+Be aware of it if you plan to make changes to the `index.html` file.
 
-Scrivi un piccolo programma che stampi ogni numero da 1 a 100 su una nuova riga.
+## Unit test
 
-- Per ogni multiplo di 3, stampa “Foo” invece del numero.
-- Per ogni multiplo di 5, stampa “Bar” invece del numero.
-- Per ogni numero multiplo di 3 e 5 insieme, stampa “FooBar” invece del numero.
+The core logic of the app is tested using `vitest`.
 
-## 2 - Carta, forbice e sasso
-
-### Acceptance Criteria
-
-- Posso giocare Umano vs Computer?
-- Posso giocare Computer vs Computer?
-- Posso giocare una nuova partita conclusa quella precedente?
+The logic of the Foobar is in `src/foobar`.
+The logic of Rock, paper, scissors, game is in `src/rps`.
